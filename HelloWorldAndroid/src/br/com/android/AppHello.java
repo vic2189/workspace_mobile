@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+/*toda classe de aplicação Android derivada da classe Activity*/
 public class AppHello extends Activity {
+	
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) { //Metodo Principal
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_app_hello);
+        setContentView(R.layout.activity_app_hello);//Metodo responsavel pela exibição da tela de Apli.
     }
 
     @Override

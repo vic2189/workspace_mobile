@@ -2,13 +2,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-
+ <!--Variavel Definida em values -->
     <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="false"
+        android:text="PRIMEIRA FRASE"
+        tools:context=".AppHello" />
+      <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/hello_world"
+        android:text="TERCEIRA FRASE"
         tools:context=".AppHello" />
+<!-- "@string/hello_world" -->
+
+      <TextView
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentTop="true"
+          android:layout_marginTop="18dp"
+          android:text="SEGUNDA FRASE"
+          tools:context=".AppHello" />
 
 </RelativeLayout>
