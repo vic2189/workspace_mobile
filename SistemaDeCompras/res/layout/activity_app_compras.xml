@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="17dp"
+        android:text="Escolha o seu produto"
+        tools:context=".AppCompras" />
+
+    <CheckBox
+        android:id="@+id/chkarroz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="17dp"
+        android:text="Arroz (R$ 2,69)" />
+
+    <CheckBox
+        android:id="@+id/chkleite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/chkarroz"
+        android:layout_below="@+id/chkarroz"
+        android:text="Leite (R$ 5,00)" />
+
+    <CheckBox
+        android:id="@+id/chkcarne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/chkleite"
+        android:layout_below="@+id/chkleite"
+        android:text="Carne (R$ 9,70)" />
+
+    <CheckBox
+        android:id="@+id/chkfeijao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/chkcarne"
+        android:layout_below="@+id/chkcarne"
+        android:text="Feijão (R$ 2,30)" />
+
+    <RadioButton
+        android:id="@+id/rbtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chkfeijao"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|left|right|fill|top"
+        android:text="Total de Compras" />
+
+</RelativeLayout>

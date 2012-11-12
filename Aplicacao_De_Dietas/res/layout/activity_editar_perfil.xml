@@ -1,0 +1,185 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="top" >
+
+    <TextView
+        android:id="@+id/textPerfil"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#9C9C9C"
+        android:gravity="center_horizontal"
+        android:text="Editar Perfil"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <EditText
+        android:id="@+id/editTextNome"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textPerfil"
+        android:layout_marginTop="43dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textNome"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textPerfil"
+        android:layout_marginTop="14dp"
+        android:text="Nome do Usuário"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/textEmail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextNome"
+        android:layout_marginTop="5dp"
+        android:text="E-mail"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textPerfil"
+        android:layout_marginTop="127dp"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/textSexo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textPerfil"
+        android:layout_marginTop="250dp"
+        android:text="Sexo"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <EditText
+        android:id="@+id/editTextIdade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editTextEmail"
+        android:layout_alignParentRight="true"
+        android:ems="4"
+        android:inputType="number"
+        android:maxLength="3" >
+
+        <requestFocus />
+    </EditText>
+
+    <Spinner
+        android:id="@+id/spinnerGenero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/editTextEmail"
+        android:layout_marginTop="310dp"
+        android:prompt="@string/sexo_prompt" />
+
+    <EditText
+        android:id="@+id/editTextPeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editTextAltura"
+        android:layout_alignLeft="@+id/editTextIdade"
+        android:layout_alignParentRight="true"
+        android:ems="3"
+        android:inputType="number"
+        android:maxLength="3" />
+
+    <TextView
+        android:id="@+id/textPeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textAltura"
+        android:layout_alignBottom="@+id/textAltura"
+        android:layout_alignLeft="@+id/editTextPeso"
+        android:text="Peso"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/textIdade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textEmail"
+        android:layout_alignBottom="@+id/textEmail"
+        android:layout_alignLeft="@+id/editTextIdade"
+        android:text="Idade"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/textAltura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="205dp"
+        android:text="Altura (centímetros)"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <EditText
+        android:id="@+id/editTextAltura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="232dp"
+        android:ems="10"
+        android:inputType="number"
+        android:maxLength="3" />
+
+    <Button
+        android:id="@+id/buttonCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textPeso"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="360dp"
+        android:text="CANCELAR"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <Button
+        android:id="@+id/buttonSalvar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="42dp"
+        android:layout_marginTop="360dp"
+        android:text=" SALVAR "
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+</RelativeLayout>
