@@ -1,11 +1,10 @@
 package br.com.tcc.android;
 
-import br.com.tcc.android.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.content.Intent;
 
 public class TelaMenuActivity extends Activity implements
 		android.view.View.OnClickListener {
@@ -25,11 +24,11 @@ public class TelaMenuActivity extends Activity implements
 		System.out.println(dao.checkDataBase());
 		
 		dao.close();
-		criaBotao();
+		criarBotoes();
 
 	}
 
-	public void criaBotao() {
+	public void criarBotoes() {
 		// Listener ira ouvir os eventos do botao
 		buttonEstatisticas = (Button) findViewById(R.id.buttonEstatisticas);
 		buttonEstatisticas.setOnClickListener(new View.OnClickListener() {

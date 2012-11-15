@@ -2,16 +2,14 @@ package br.com.tcc.android;
 
 import java.util.List;
 
-import br.com.tcc.android.R;
 import android.app.Activity;
-import android.os.Bundle;
-import android.telephony.TelephonyManager;
-import android.view.View;
-import android.widget.*;
-import br.com.tcc.android.Perfil;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 public class TelaEditarPerfilActivity extends Activity {
 
@@ -45,11 +43,11 @@ public class TelaEditarPerfilActivity extends Activity {
 		PerfilDAO dao = new PerfilDAO(this);
 		List<Perfil> perfil = dao.buscaPerfil(idPerfil);
 		if(perfil.isEmpty()){
-			editTextNome = setText(perfil.get(0).getNome());
-			editTextEmail = setText(perfil.get(0).getEmail());
-			editTextIdade = setText(perfil.get(0).getIdade());
-			editTextAltura = setText(perfil.get(0).getAltura());
-			editTextPeso = setText(perfil.get(0).getPeso());
+			editTextNome.setText(perfil.get(0).getNome());
+			editTextEmail.setText(perfil.get(0).getEmail());
+			editTextIdade.setText(perfil.get(0).getIdade());
+			editTextAltura.setText(perfil.get(0).getAltura());
+			editTextPeso.setText(perfil.get(0).getPeso());
 		}
 				
 		criaBotao();
