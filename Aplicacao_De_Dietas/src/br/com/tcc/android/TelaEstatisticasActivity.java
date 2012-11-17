@@ -1,9 +1,7 @@
 package br.com.tcc.android;
 
-import br.com.tcc.android.R;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 
 /**TelaEstatisticasActivity.
  * 

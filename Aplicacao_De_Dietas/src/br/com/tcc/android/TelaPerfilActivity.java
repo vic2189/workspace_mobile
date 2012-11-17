@@ -1,50 +1,52 @@
 package br.com.tcc.android;
 
-import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class TelaPerfilActivity extends Activity {
 
-	EditText textMostraNome, textMostraEmail, textMostraIdade, textMostraAltura,
-	textMostraPeso,textMostraGenero;
+	TextView textMostraNome, textMostraEmail, textMostraIdade,
+			textMostraAltura, textMostraPeso, textMostraGenero;
 	private Button buttonEditarPerfil;
 	private Button buttonVoltar;
-	private List<Perfil> perfil;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_perfil);
-		textMostraNome = (EditText) findViewById(R.id.textMostraNome);
-		textMostraEmail = (EditText) findViewById(R.id.textMostraEmail);
-		textMostraIdade = (EditText) findViewById(R.id.textMostraIdade);
-		textMostraPeso = (EditText) findViewById(R.id.textMostraPeso);
-		textMostraAltura = (EditText) findViewById(R.id.textMostraAltura);
-		textMostraGenero = (EditText) findViewById(R.id.textMostraSexo);
 		
-		PerfilDAO dao = new PerfilDAO(this);
-		this.perfil = dao.getLista();
-		dao.close();
-		if(perfil.isEmpty()){
-			textMostraNome.setText(perfil.get(0).getNome());
-			textMostraEmail.setText(perfil.get(0).getEmail());
-			textMostraIdade.setText(perfil.get(0).getIdade());
-			textMostraPeso.setText(perfil.get(0).getPeso());
-			textMostraAltura.setText(perfil.get(0).getAltura());
-			textMostraGenero.setText(perfil.get(0).getGenero());
+		textMostraNome = (TextView) findViewById(R.id.textMostraNome);
+		textMostraEmail = (TextView) findViewById(R.id.textMostraEmail);
+		textMostraIdade = (TextView) findViewById(R.id.textMostraIdade);
+		textMostraPeso = (TextView) findViewById(R.id.textMostraPeso);
+		textMostraAltura = (TextView) findViewById(R.id.textMostraAltura);
+		textMostraGenero = (TextView) findViewById(R.id.textMostraSexo);
 
-		}else{
-			textMostraNome.setText("Não a Perfil Cadastrado");
-			textMostraEmail.setText("Clique em Editar Perfil para cadastrar um perfil");
+		PerfilDAO dao = new PerfilDAO(this);
+		Perfil perfil = dao.getPerfil();
+		dao.close();
+		if (perfil.getIdPerfil() != null) {
+			textMostraNome.setText(perfil.getNome());
+			textMostraEmail.setText(perfil.getEmail());
+			textMostraIdade.setText(Integer.toString(perfil.getIdade()));
+			textMostraPeso.setText(Integer.toString(perfil.getPeso()));
+			textMostraAltura.setText(Integer.toString(perfil.getAltura()));
+			textMostraGenero.setText(perfil.getGenero());
+			
+		} else {
+			Toast.makeText(
+					getBaseContext(),
+					"Não a Perfil Cadastrado,"
+							+ " clique em Editar Perfil para cadastrar um Perfil!",
+					Toast.LENGTH_LONG).show();
+			
 		}
-		
+
 		criaBotao();
 	}
 
@@ -54,11 +56,8 @@ public class TelaPerfilActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(TelaPerfilActivity.this,
 						TelaEditarPerfilActivity.class);
-				Bundle extras = new Bundle();
-				extras.putInt("perfil", perfil.get(0).getIdPerfil());
-				intent.putExtras(extras);
 				startActivity(intent);
-				
+
 			}
 		});
 		buttonVoltar = (Button) findViewById(R.id.buttonVoltar);

@@ -10,10 +10,8 @@ public class TelaMenuActivity extends Activity implements
 		android.view.View.OnClickListener {
 
 	private Button buttonPerfil;
-	private Button buttonMaisDietas;
 	private Button buttonMinhaDieta;
 	private Button buttonEstatisticas;
-	private android.view.View.OnClickListener telaChamada;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,15 +47,7 @@ public class TelaMenuActivity extends Activity implements
 				startActivity(intent);
 			}
 		});
-		buttonMaisDietas = (Button) findViewById(R.id.buttonMaisDietas);
-		buttonMaisDietas.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				// Cria a chamada para a pagina
-				Intent intent = new Intent(TelaMenuActivity.this,
-						TelaMaisDietasActivity.class);
-				startActivity(intent);
-			}
-		});
+	
 
 		buttonMinhaDieta = (Button) findViewById(R.id.buttonMinhaDieta);
 		buttonMinhaDieta.setOnClickListener(new View.OnClickListener() {

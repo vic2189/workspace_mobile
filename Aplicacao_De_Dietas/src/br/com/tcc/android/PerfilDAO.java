@@ -1,18 +1,17 @@
 package br.com.tcc.android;
 
-import java.util.ArrayList;
-import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.SyncStateContract.Helpers;
-import br.com.tcc.android.*;
+
+
 
 public class PerfilDAO extends SQLiteOpenHelper {
 
+	
 	private static int DATABASE_VERSION = 1;
 	private static String DB_PATH = "/data/data/br.com.tcc.android/databases/";
 	public static String TABELA_PERFIL = "perfil_usuario";
@@ -55,7 +54,10 @@ public class PerfilDAO extends SQLiteOpenHelper {
 	}
 
 	public void adicionar(Perfil dadosPerfil) {
-		ContentValues values = new ContentValues();
+		ContentValues values = new ContentValues();		
+		getWritableDatabase().delete(TABELA_PERFIL,
+				COLUNA_ID_PERFIL + " = " + dadosPerfil.getIdPerfil(), null);
+		close();
 		values.put(COLUNA_ID_PERFIL, dadosPerfil.getIdPerfil());
 		values.put(COLUNA_NOME_PERFIL, dadosPerfil.getNome());
 		values.put(COLUNA_IDADE_PERFIL, dadosPerfil.getIdade());
@@ -64,16 +66,16 @@ public class PerfilDAO extends SQLiteOpenHelper {
 		values.put(COLUNA_PESO_PERFIL, dadosPerfil.getPeso());
 		values.put(COLUNA_EMAIL_PERFIL, dadosPerfil.getEmail());
 		getWritableDatabase().insert(TABELA_PERFIL, null, values);
+		close();
 	}
 
-	public List<Perfil> getLista() {
-		List<Perfil> lista = new ArrayList<Perfil>();
+	public Perfil getPerfil() {
 
 		Cursor c = getWritableDatabase().query(TABELA_PERFIL, COLS, null, null,
 				null, null, null);
-
-		while (c.moveToNext()) {
-			Perfil perfil = new Perfil();
+		
+		Perfil perfil = new Perfil();
+		if (c.moveToNext()) {
 			perfil.setIdPerfil(c.getInt(0));
 			perfil.setNome(c.getString(1));
 			perfil.setIdade(c.getInt(2));
@@ -81,10 +83,10 @@ public class PerfilDAO extends SQLiteOpenHelper {
 			perfil.setAltura(c.getInt(4));
 			perfil.setPeso(c.getInt(5));
 			perfil.setEmail(c.getString(6));
-			lista.add(perfil);
 		}
 		c.close();
-		return lista;
+		close();
+		return perfil;
 	}
 
 	public boolean checkDataBase() {
@@ -102,24 +104,4 @@ public class PerfilDAO extends SQLiteOpenHelper {
 		return checkDB != null ? true : false;
 	}
 
-	public List<Perfil> buscaPerfil(int idPerfil) {
-		List<Perfil> lista = new ArrayList<Perfil>();
-
-		Cursor c = getWritableDatabase().query(TABELA_PERFIL, COLS, COLUNA_ID_PERFIL + " = "
-				+ idPerfil, null, null, null, null);
-		
-		while (c.moveToNext()) {
-			Perfil perfil = new Perfil();
-			perfil.setIdPerfil(c.getInt(0));
-			perfil.setNome(c.getString(1));
-			perfil.setIdade(c.getInt(2));
-			perfil.setGenero(c.getString(3));
-			perfil.setAltura(c.getInt(4));
-			perfil.setPeso(c.getInt(5));
-			perfil.setEmail(c.getString(6));
-			lista.add(perfil);
-		}
-		c.close();
-		return lista;
-	}
 }

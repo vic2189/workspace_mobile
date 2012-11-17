@@ -21,7 +21,7 @@ public final class R {
         public static final int buttonCancelar=0x7f08000d;
         public static final int buttonEditarPerfil=0x7f080016;
         public static final int buttonEstatisticas=0x7f080013;
-        public static final int buttonMaisDietas=0x7f080014;
+        public static final int buttonMaisDietas=0x7f080015;
         public static final int buttonMinhaDieta=0x7f080011;
         public static final int buttonPerfil=0x7f080012;
         public static final int buttonSalvar=0x7f08000e;
@@ -38,7 +38,7 @@ public final class R {
         public static final int textDietasDoSite=0x7f08000f;
         public static final int textEmail=0x7f080003;
         public static final int textIdade=0x7f08000c;
-        public static final int textMenu=0x7f080015;
+        public static final int textMenu=0x7f080014;
         public static final int textMostraAltura=0x7f08001c;
         public static final int textMostraEmail=0x7f080019;
         public static final int textMostraIdade=0x7f08001a;

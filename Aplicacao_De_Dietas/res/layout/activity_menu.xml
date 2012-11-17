@@ -42,18 +42,6 @@
         android:textStyle="bold"
         android:typeface="serif" />
 
-    <Button
-        android:id="@+id/buttonMaisDietas"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="240dp"
-        android:gravity="left|center"
-        android:text="Mais Dietas"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
-
     <TextView
         android:id="@+id/textMenu"
         android:layout_width="fill_parent"
