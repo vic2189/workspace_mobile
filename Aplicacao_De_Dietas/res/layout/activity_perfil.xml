@@ -1,37 +1,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="top" >
+	xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:gravity="top">
 
-    <TextView
-        android:id="@+id/textPerfil"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#9C9C9C"
-        android:gravity="center_horizontal"
-        android:text="Perfil"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
+
+	<TextView android:id="@+id/textMostraPerfil"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:background="#9C9C9C" android:gravity="center_horizontal"
+		android:text="Perfil" android:textAppearance="?android:attr/textAppearanceLarge"
+		android:textSize="24dp" android:textStyle="bold" android:typeface="serif" />
 
 
 
 
 
-    <Button
-        android:id="@+id/buttonEditarPerfil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="29dp"
-        android:layout_marginTop="250dp"
-        android:text="EDITAR PERFIL"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
+	<Button android:id="@+id/buttonEditarPerfil"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_alignParentBottom="false"
+		android:layout_alignParentRight="true" android:layout_marginRight="29dp"
+		android:layout_marginTop="250dp" android:text="EDITAR PERFIL"
+		android:textSize="18dp" android:textStyle="bold" android:typeface="serif" />
 
 
 
@@ -46,19 +33,12 @@
 
 
 
-    <Button
-        android:id="@+id/buttonVoltar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonCancelar"
-        android:layout_alignBottom="@+id/buttonCancelar"
-        android:layout_marginLeft="33dp"
-        android:layout_marginTop="250dp"
-        android:layout_toLeftOf="@+id/buttonCancelar"
-        android:text="VOLTAR"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
+	<Button android:id="@+id/buttonVoltar" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_alignBaseline="@+id/buttonCancelar"
+		android:layout_alignBottom="@+id/buttonCancelar"
+		android:layout_marginLeft="33dp" android:layout_marginTop="250dp"
+		android:layout_toLeftOf="@+id/buttonCancelar" android:text="VOLTAR"
+		android:textSize="18dp" android:textStyle="bold" android:typeface="serif" />
 
 
 
@@ -66,88 +46,65 @@
 
 
 
-    <TextView
-        android:id="@+id/textMostraNome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textPerfil"
-        android:text="TextView"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
 
 
 
-    <TextView
-        android:id="@+id/textMostraEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textMostraNome"
-        android:text="TextView"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
+	<TextView android:id="@+id/textMostraNome"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true" android:layout_alignParentRight="true"
+		android:layout_below="@+id/textMostraPerfil" android:text="NOME:"
+		android:textSize="18dp" android:textStyle="bold" android:typeface="serif" />
 
 
 
 
 
-    <TextView
-        android:id="@+id/textMostraIdade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textMostraEmail"
-        android:text="TextView"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
+	<TextView android:id="@+id/textMostraEmail"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true" android:layout_alignParentRight="true"
+		android:layout_below="@+id/textMostraNome" android:text="E-MAIL"
+		android:textSize="18dp" android:textStyle="bold" android:typeface="serif" />
 
 
 
-    <TextView
-        android:id="@+id/textMostraPeso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textMostraIdade"
-        android:text="TextView"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
 
 
 
-    <TextView
-        android:id="@+id/textMostraAltura"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textMostraPeso"
-        android:text="TextView"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
+
+	<TextView android:id="@+id/textMostraIdade"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true" android:layout_alignParentRight="true"
+		android:layout_below="@+id/textMostraEmail" android:text="IDADE:"
+		android:textSize="18dp" android:textStyle="bold" android:typeface="serif" />
 
 
 
-    <TextView
-        android:id="@+id/textMostraSexo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textMostraAltura"
-        android:text="TextView"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
+
+
+	<TextView android:id="@+id/textMostraPeso"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true" android:layout_alignParentRight="true"
+		android:layout_below="@+id/textMostraIdade" android:text="PESO:"
+		android:textSize="18dp" android:textStyle="bold" android:typeface="serif" />
+
+
+
+
+
+	<TextView android:id="@+id/textMostraAltura"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true" android:layout_alignParentRight="true"
+		android:layout_below="@+id/textMostraPeso" android:text="ALTURA:"
+		android:textSize="18dp" android:textStyle="bold" android:typeface="serif" />
+
+
+
+
+
+	<TextView android:id="@+id/textMostraSexo"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true" android:layout_alignParentRight="true"
+		android:layout_below="@+id/textMostraAltura" android:text="SEXO:"
+		android:textSize="18dp" android:textStyle="bold" android:typeface="serif" />
 
 </RelativeLayout>

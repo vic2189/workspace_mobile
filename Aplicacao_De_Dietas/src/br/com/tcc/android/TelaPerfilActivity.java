@@ -19,7 +19,6 @@ public class TelaPerfilActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_perfil);
-		
 		textMostraNome = (TextView) findViewById(R.id.textMostraNome);
 		textMostraEmail = (TextView) findViewById(R.id.textMostraEmail);
 		textMostraIdade = (TextView) findViewById(R.id.textMostraIdade);
@@ -31,26 +30,26 @@ public class TelaPerfilActivity extends Activity {
 		Perfil perfil = dao.getPerfil();
 		dao.close();
 		if (perfil.getIdPerfil() != null) {
-			textMostraNome.setText(perfil.getNome());
-			textMostraEmail.setText(perfil.getEmail());
-			textMostraIdade.setText(Integer.toString(perfil.getIdade()));
-			textMostraPeso.setText(Integer.toString(perfil.getPeso()));
-			textMostraAltura.setText(Integer.toString(perfil.getAltura()));
-			textMostraGenero.setText(perfil.getGenero());
+			textMostraNome.setText("NOME: " + perfil.getNome());
+			textMostraEmail.setText("E-MAIL: " + perfil.getEmail());
+			textMostraIdade.setText("IDADE: " + Integer.toString(perfil.getIdade()));
+			textMostraPeso.setText("PESO(Kg): " + Integer.toString(perfil.getPeso()));
+			textMostraAltura.setText("ALTURA(cm): " + Integer.toString(perfil.getAltura()));
+			textMostraGenero.setText("GENERO: " + perfil.getGenero());
 			
 		} else {
 			Toast.makeText(
 					getBaseContext(),
-					"Não a Perfil Cadastrado,"
+					"Não há Perfil Cadastrado,"
 							+ " clique em Editar Perfil para cadastrar um Perfil!",
 					Toast.LENGTH_LONG).show();
 			
 		}
 
-		criaBotao();
+		criaBotoes();
 	}
 
-	public void criaBotao() {
+	public void criaBotoes() {
 		buttonEditarPerfil = (Button) findViewById(R.id.buttonEditarPerfil);
 		buttonEditarPerfil.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -71,3 +70,4 @@ public class TelaPerfilActivity extends Activity {
 
 	}
 }
+

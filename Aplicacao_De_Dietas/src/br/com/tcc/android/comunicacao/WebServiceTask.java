@@ -33,6 +33,7 @@ public class WebServiceTask {
 	private static final int SOCKET_TIMEOUT = 7000;
 	
 	public String getXMLFromUrl(String url) {
+		System.out.println("REQUISITANDO XML DA URL: " + url);
 		HttpClient httpclient = new DefaultHttpClient(getHttpParams());
 		String xml = "";
 		try {
@@ -43,7 +44,6 @@ public class WebServiceTask {
 
 			HttpEntity httpEntity = response.getEntity();
 			xml = EntityUtils.toString(httpEntity);
-
 			return xml;
 
 		} catch (Exception e) {
