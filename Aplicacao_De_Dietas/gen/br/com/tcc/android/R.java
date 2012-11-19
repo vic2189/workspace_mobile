@@ -14,57 +14,76 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int ic_action_search=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int almoco=0x7f020000;
+        public static final int cafe=0x7f020001;
+        public static final int ic_action_search=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int jantar=0x7f020004;
     }
     public static final class id {
         public static final int buttonCancelar=0x7f08000d;
-        public static final int buttonEditarPerfil=0x7f080025;
+        public static final int buttonEditarPerfil=0x7f08001f;
+        public static final int buttonEscolheRefManhaPrincipal=0x7f080033;
+        public static final int buttonEscolheRefOpcionalManha=0x7f080029;
+        public static final int buttonEscolheRefOpcionalNoite=0x7f08002c;
+        public static final int buttonEscolheRefOpcionalTarde=0x7f08002f;
+        public static final int buttonEscolheRefPrincipalNoite=0x7f080036;
+        public static final int buttonEscolheRefPrincipalTarde=0x7f080039;
         public static final int buttonEstatisticas=0x7f080013;
         public static final int buttonMaisDietas=0x7f080015;
         public static final int buttonMinhaDieta=0x7f080011;
         public static final int buttonPerfil=0x7f080012;
         public static final int buttonSalvar=0x7f08000e;
-        public static final int buttonVoltar=0x7f080026;
+        public static final int buttonVoltar=0x7f080020;
+        public static final int buttonVoltarRefOpcionalManha=0x7f08002a;
+        public static final int buttonVoltarRefOpcionalNoite=0x7f08002d;
+        public static final int buttonVoltarRefOpcionalTarde=0x7f080030;
+        public static final int buttonVoltarRefPrincipalManha=0x7f080034;
+        public static final int buttonVoltarRefPrincipalNoite=0x7f080037;
+        public static final int buttonVoltarRefPrincipalTarde=0x7f08003a;
         public static final int editTextAltura=0x7f080009;
         public static final int editTextEmail=0x7f080004;
         public static final int editTextIdade=0x7f080006;
         public static final int editTextNome=0x7f080001;
         public static final int editTextPeso=0x7f080008;
-        public static final int listViewRefeicaoManha=0x7f08001c;
-        public static final int listViewRefeicaoNoite=0x7f080023;
-        public static final int listViewRefeicaoTarde=0x7f080022;
+        public static final int imagemview=0x7f08003b;
+        public static final int listViewAlimentosOpcionalManha=0x7f080028;
+        public static final int listViewAlimentosOpcionalNoite=0x7f08002b;
+        public static final int listViewAlimentosOpcionalTarde=0x7f08002e;
+        public static final int listViewAlimentosPrincipalManha=0x7f080032;
+        public static final int listViewAlimentosPrincipalNoite=0x7f080035;
+        public static final int listViewAlimentosPrincipalTarde=0x7f080038;
+        public static final int listViewRefeicaoManha=0x7f08001b;
+        public static final int listViewRefeicaoNoite=0x7f08001d;
+        public static final int listViewRefeicaoTarde=0x7f08001a;
         public static final int listaDietas=0x7f080010;
-        public static final int menu_settings=0x7f08002d;
-        public static final int opcao_download=0x7f08002e;
-        public static final int radioButtonRefeicaoOpcionalManha=0x7f08001b;
-        public static final int radioButtonRefeicaoOpcionalNoite=0x7f080021;
-        public static final int radioButtonRefeicaoOpcionalTarde=0x7f08001e;
-        public static final int radioButtonRefeicaoPrincipalManha=0x7f08001a;
-        public static final int radioButtonRefeicaoPrincipalNoite=0x7f080020;
-        public static final int radioButtonRefeicaoPrincipalTarde=0x7f08001d;
+        public static final int menu_settings=0x7f08003d;
+        public static final int opcao_download=0x7f08003e;
         public static final int spinnerGenero=0x7f080007;
+        public static final int text=0x7f08003c;
         public static final int textAltura=0x7f08000b;
-        public static final int textBarraFinal=0x7f08001f;
         public static final int textDietaAtual=0x7f080016;
         public static final int textDietasDoSite=0x7f08000f;
         public static final int textEmail=0x7f080003;
         public static final int textIdade=0x7f08000c;
         public static final int textManha=0x7f080017;
         public static final int textMenu=0x7f080014;
-        public static final int textMostraAltura=0x7f08002b;
-        public static final int textMostraEmail=0x7f080028;
-        public static final int textMostraIdade=0x7f080029;
-        public static final int textMostraNome=0x7f080027;
-        public static final int textMostraPerfil=0x7f080024;
-        public static final int textMostraPeso=0x7f08002a;
-        public static final int textMostraSexo=0x7f08002c;
+        public static final int textMostraAltura=0x7f080025;
+        public static final int textMostraEmail=0x7f080022;
+        public static final int textMostraIdade=0x7f080023;
+        public static final int textMostraNome=0x7f080021;
+        public static final int textMostraPerfil=0x7f08001e;
+        public static final int textMostraPeso=0x7f080024;
+        public static final int textMostraSexo=0x7f080026;
         public static final int textNoite=0x7f080019;
         public static final int textNome=0x7f080002;
         public static final int textPerfil=0x7f080000;
         public static final int textPeso=0x7f08000a;
         public static final int textSexo=0x7f080005;
         public static final int textTarde=0x7f080018;
+        public static final int textView1=0x7f08001c;
+        public static final int textViewRefeicaoOpcional=0x7f080027;
+        public static final int textViewRefeicaoPrincipal=0x7f080031;
     }
     public static final class layout {
         public static final int activity_editar_perfil=0x7f030000;
@@ -73,6 +92,13 @@ public final class R {
         public static final int activity_menu=0x7f030003;
         public static final int activity_minhadieta=0x7f030004;
         public static final int activity_perfil=0x7f030005;
+        public static final int activity_refeicao_opcional_manha=0x7f030006;
+        public static final int activity_refeicao_opcional_noite=0x7f030007;
+        public static final int activity_refeicao_opcional_tarde=0x7f030008;
+        public static final int activity_refeicao_principal_manha=0x7f030009;
+        public static final int activity_refeicao_principal_noite=0x7f03000a;
+        public static final int activity_refeicao_principal_tarde=0x7f03000b;
+        public static final int item_list=0x7f03000c;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;

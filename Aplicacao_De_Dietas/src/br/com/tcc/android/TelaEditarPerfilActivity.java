@@ -1,9 +1,12 @@
 package br.com.tcc.android;
 
 
+import br.com.tcc.android.dao.PerfilDAO;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -61,12 +64,7 @@ public class TelaEditarPerfilActivity extends Activity {
 
 			public void onClick(View v) {
 
-				/*DESCOMENTAR O TRECHO PARA TESTAR NO CELULAR
-				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-				dadosPerfil.setIdPerfil(Integer.parseInt(telephonyManager.getDeviceId()));
-				 */
 				Perfil dadosPerfil = new Perfil();
-				dadosPerfil.setIdPerfil(1);				
 				dadosPerfil.setNome(editTextNome.getEditableText().toString());				
 				dadosPerfil.setEmail(editTextEmail.getEditableText().toString());				
 				String idade = editTextIdade.getText().toString();
@@ -85,7 +83,7 @@ public class TelaEditarPerfilActivity extends Activity {
 				dao.close();
 
 				Intent intent = new Intent(TelaEditarPerfilActivity.this,
-						TelaMenuActivity.class);
+						TelaPerfilActivity.class);
 				startActivity(intent);
 
 			}

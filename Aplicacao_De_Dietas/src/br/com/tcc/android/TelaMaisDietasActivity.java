@@ -1,6 +1,7 @@
 package br.com.tcc.android;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,13 +25,18 @@ import android.widget.ListView;
 import android.widget.Toast;
 import br.com.tcc.android.comunicacao.WebServiceTask;
 import br.com.tcc.android.dao.MinhaDietaDAO;
+import br.com.tcc.android.dao.PerfilDAO;
 import br.com.tcc.android.model.MinhaDieta;
 
 public class TelaMaisDietasActivity extends Activity{
 
 	private static final String TAG_DIETA = "dieta";
-	private static final String URL = "http://192.168.2.102:8080/ServidorMobile/resource/mobile/dietas/disponiveis";
-	private static final String URL_DOWNLOAD_DIETA = "http://192.168.2.102:8080/ServidorMobile/resource/mobile/download/";
+	private static final String HOST = "http://192.168.2.102:8080";
+
+	private static final String URL_DIETAS_DISPONIVEIS = HOST + "/ServidorMobile/resource/mobile/dietas/disponiveis";
+	private static final String URL_DOWNLOAD_DIETA = HOST + "/ServidorMobile/resource/mobile/download/";
+	private static final String URL_ENVIO_PERFIL = HOST + "/ServidorMobile/resource/mobile/perfil/criacao";
+
 	List<String> listaDietasDisponiveis = new ArrayList<String>();
 	Map<String, String> mapaDietasDisponiveis = new HashMap<String, String>();
 	ArrayAdapter<String> adaptador = null;
@@ -45,7 +51,7 @@ public class TelaMaisDietasActivity extends Activity{
 
 		WebServiceTask webServiceTask = new WebServiceTask();
 
-		String dietaXml = webServiceTask.getXMLFromUrl(URL);
+		String dietaXml = webServiceTask.getXMLFromUrl(URL_DIETAS_DISPONIVEIS);
 
 		if(dietaXml != null){
 			Document document = webServiceTask.getDomElement(dietaXml);
@@ -76,15 +82,14 @@ public class TelaMaisDietasActivity extends Activity{
 
 		listView.setAdapter(adapter); 
 
-		progress.dismiss();
 
 		registerForContextMenu(listView);
+		progress.dismiss();
 
 	}
 
 	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_download, menu);
@@ -97,10 +102,14 @@ public class TelaMaisDietasActivity extends Activity{
 
 		case R.id.opcao_download:
 			final ProgressDialog progress = ProgressDialog.show(TelaMaisDietasActivity.this, "Aguarde", "Fazendo download da dieta!");
-			String nomeDieta = listaDietasDisponiveis.get((int) info.id);
-			String idDietaEscolhida = mapaDietasDisponiveis.get(nomeDieta);
+			String chaveIdDieta = listaDietasDisponiveis.get((int) info.id);
+			String idDietaEscolhida = mapaDietasDisponiveis.get(chaveIdDieta);
 
 			WebServiceTask webServiceTask = new WebServiceTask();
+			PerfilDAO perfilDAO = new PerfilDAO(TelaMaisDietasActivity.this);
+			Perfil perfil = perfilDAO.getPerfil();
+			webServiceTask.enviarPerfil(perfil, idDietaEscolhida, URL_ENVIO_PERFIL);
+
 			String dietaEscolhidaXML = webServiceTask.getXMLFromUrl(URL_DOWNLOAD_DIETA + idDietaEscolhida);
 
 			System.out.println("XML RECEBIDO: " + dietaEscolhidaXML);
@@ -122,9 +131,8 @@ public class TelaMaisDietasActivity extends Activity{
 
 	private void gravarDieta(String dietaEscolhidaXML, WebServiceTask webServiceTask) {
 		MinhaDietaDAO minhaDietaDAO = new MinhaDietaDAO(TelaMaisDietasActivity.this);
-		//		minhaDietaDAO.deletarTodosRegistros();
+		minhaDietaDAO.deletarTodosRegistros();
 
-		MinhaDieta minhaDieta = new MinhaDieta();
 		if(dietaEscolhidaXML != null){
 			Document document = webServiceTask.getDomElement(dietaEscolhidaXML);
 
@@ -157,24 +165,46 @@ public class TelaMaisDietasActivity extends Activity{
 				String horarioRefeicao = webServiceTask.getValue(elementoRefeicao, "horario");
 
 
-				minhaDieta.setId(id);
-				minhaDieta.setIdentificacaoDieta(identificacaoDieta);
-				minhaDieta.setNomeDieta(nomeDieta);
-				minhaDieta.setDuracaoDieta(duracaoDieta);
-				minhaDieta.setHorarioRefeicao(horarioRefeicao);
-				minhaDieta.setTipoRefeicao(tipoRefeicao);
-				minhaDieta.setAlimentos(listaMeusAlimentos);
-				minhaDieta.setQuantidades(listaQuantidadeAlimento);
+				MinhaDieta minhaDieta = criarMinhaDieta(identificacaoDieta,	nomeDieta, duracaoDieta,
+						listaMeusAlimentos, listaQuantidadeAlimento, id, tipoRefeicao, horarioRefeicao);
 
 				logarDieta(nomeDieta, duracaoDieta, listaMeusAlimentos, listaQuantidadeAlimento, tipoRefeicao, horarioRefeicao);
+				minhaDietaDAO.adicionar(minhaDieta);
 			}
 
-			minhaDietaDAO.adicionar(minhaDieta);
 			minhaDietaDAO.close();
-			
+
 		}else{
 			Toast.makeText(getApplicationContext(), "Nao foi possivel conectar com o servidor", Toast.LENGTH_SHORT).show();
 		}
+	}
+
+	private MinhaDieta criarMinhaDieta(Integer identificacaoDieta, String nomeDieta,
+			String duracaoDieta, String[] listaMeusAlimentos,
+			String[] listaQuantidadeAlimento, Integer id, String tipoRefeicao,
+			String horarioRefeicao) {
+		
+		MinhaDieta minhaDieta = new MinhaDieta();
+		String data = getData();
+		minhaDieta.setId(id);
+		minhaDieta.setIdentificacaoDieta(identificacaoDieta);
+		minhaDieta.setNomeDieta(nomeDieta);
+		minhaDieta.setDuracaoDieta(duracaoDieta);
+		minhaDieta.setHorarioRefeicao(horarioRefeicao);
+		minhaDieta.setTipoRefeicao(tipoRefeicao);
+		minhaDieta.setAlimentos(listaMeusAlimentos);
+		minhaDieta.setQuantidades(listaQuantidadeAlimento);
+		minhaDieta.setDataDownload(data);
+		return minhaDieta;
+	}
+
+	private String getData() {
+		Calendar calendar = Calendar.getInstance();
+		Integer dia = calendar.get(Calendar.DAY_OF_MONTH);
+		Integer mes = calendar.get(Calendar.MONTH) +1;
+		Integer ano = calendar.get(Calendar.YEAR);
+		String data = dia + "/" + mes + "/" +ano;
+		return data;
 	}
 
 	private void logarDieta(String nomeDieta, String duracaoDieta, String[] listaMeusAlimentos, 

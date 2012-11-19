@@ -1,6 +1,7 @@
 package br.com.tcc.android.model;
 
 
+
 public class MinhaDieta {
 
 	private Integer id;
@@ -9,6 +10,7 @@ public class MinhaDieta {
 	private String duracaoDieta;
 	private String horarioRefeicao;
 	private String tipoRefeicao;
+	private String dataDownload;
 	private String[] alimentos;
 	private String[] quantidades;
 	
@@ -47,6 +49,12 @@ public class MinhaDieta {
 	}
 	public void setTipoRefeicao(String tipoRefeicao) {
 		this.tipoRefeicao = tipoRefeicao;
+	}
+	public String getDataDownload() {
+		return dataDownload;
+	}
+	public void setDataDownload(String hojeFormatado) {
+		this.dataDownload = hojeFormatado;
 	}
 	public String[] getAlimentos() {
 		return alimentos;

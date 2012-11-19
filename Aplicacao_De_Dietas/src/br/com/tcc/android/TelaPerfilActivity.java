@@ -1,5 +1,6 @@
 package br.com.tcc.android;
 
+import br.com.tcc.android.dao.PerfilDAO;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

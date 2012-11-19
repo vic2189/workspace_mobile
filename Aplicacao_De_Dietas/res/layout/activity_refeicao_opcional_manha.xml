@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent"
+	android:orientation="vertical">
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <TextView android:id="@+id/textViewRefeicaoOpcional" android:layout_width="fill_parent" android:layout_height="wrap_content" android:background="#33CC33" android:gravity="center_vertical|center_horizontal" android:text="Refeição Opcional" android:textColor="#FFFFFF" android:textSize="20dp" android:textStyle="bold" android:typeface="serif"/>
+    <ListView android:id="@+id/listViewAlimentosOpcionalManha" android:layout_width="fill_parent" android:layout_height="319dp"></ListView>
+    <Button android:id="@+id/buttonEscolheRefOpcionalManha" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="ESCOLHER REFEIÇÃO" android:textSize="18dp" android:textStyle="bold" android:typeface="serif"/>
+    <Button android:id="@+id/buttonVoltarRefOpcionalManha" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="VOLTAR" android:textSize="18dp" android:textStyle="bold" android:typeface="serif"/>
+    
+</LinearLayout>
+</ScrollView>

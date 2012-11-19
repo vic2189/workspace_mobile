@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import br.com.tcc.android.dao.PerfilDAO;
 
 public class TelaMenuActivity extends Activity implements
 		android.view.View.OnClickListener {
@@ -19,6 +20,7 @@ public class TelaMenuActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);// Mapeando a pagina
 												// activity_menu
+		
 		PerfilDAO dao = new PerfilDAO(this);
 		Perfil perfil = dao.getPerfil();
 		dao.close();

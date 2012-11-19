@@ -3,7 +3,8 @@ package br.com.tcc.android.model;
 public class AcompanhaDieta {
 
 	public String idNomeDieta;
-	public Integer horarioRefeicao;
+	public String dataInicio;
+	public String horarioRefeicao;
 	public String refeicaoEscolida;
 	public Integer diaDieta;
 
@@ -15,11 +16,19 @@ public class AcompanhaDieta {
 		this.idNomeDieta = idNomeDieta;
 	}
 
-	public Integer getHorarioRefeicao() {
+	public String getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(String dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public String getHorarioRefeicao() {
 		return horarioRefeicao;
 	}
 
-	public void setHorarioRefeicao(Integer horarioRefeicao) {
+	public void setHorarioRefeicao(String horarioRefeicao) {
 		this.horarioRefeicao = horarioRefeicao;
 	}
 

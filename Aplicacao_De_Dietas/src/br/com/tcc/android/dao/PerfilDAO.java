@@ -1,4 +1,8 @@
-package br.com.tcc.android;
+package br.com.tcc.android.dao;
+
+import java.util.Random;
+
+import br.com.tcc.android.Perfil;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,11 +11,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
-
 public class PerfilDAO extends SQLiteOpenHelper {
 
-	
 	private static int DATABASE_VERSION = 1;
 	private static String DB_PATH = "/data/data/br.com.tcc.android/databases/";
 	public static String TABELA_PERFIL = "perfil_usuario";
@@ -54,9 +55,19 @@ public class PerfilDAO extends SQLiteOpenHelper {
 	}
 
 	public void adicionar(Perfil dadosPerfil) {
-		ContentValues values = new ContentValues();		
-		getWritableDatabase().delete(TABELA_PERFIL,
-				COLUNA_ID_PERFIL + " = " + dadosPerfil.getIdPerfil(), null);
+		ContentValues values = new ContentValues();
+		Cursor colunaId = getWritableDatabase().rawQuery(
+				"SELECT " + COLUNA_ID_PERFIL + " FROM " + TABELA_PERFIL, null);
+		if(colunaId.moveToNext()){
+			dadosPerfil.setIdPerfil(colunaId.getInt(0));
+			getWritableDatabase().delete(TABELA_PERFIL,
+			COLUNA_ID_PERFIL + " = " + dadosPerfil.getIdPerfil(), null);
+		}else{
+			Random random = new Random();
+			int id = random.nextInt();
+			dadosPerfil.setIdPerfil(id);
+		}
+
 		close();
 		values.put(COLUNA_ID_PERFIL, dadosPerfil.getIdPerfil());
 		values.put(COLUNA_NOME_PERFIL, dadosPerfil.getNome());
@@ -73,7 +84,7 @@ public class PerfilDAO extends SQLiteOpenHelper {
 
 		Cursor c = getWritableDatabase().query(TABELA_PERFIL, COLS, null, null,
 				null, null, null);
-		
+
 		Perfil perfil = new Perfil();
 		if (c.moveToNext()) {
 			perfil.setIdPerfil(c.getInt(0));

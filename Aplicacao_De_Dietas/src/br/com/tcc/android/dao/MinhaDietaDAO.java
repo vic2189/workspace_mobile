@@ -1,7 +1,10 @@
 package br.com.tcc.android.dao;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -11,8 +14,9 @@ public class MinhaDietaDAO extends SQLiteOpenHelper {
 
 	private static int DATABASE_VERSION = 1;
 	private static String DB_PATH = "/data/data/br.com.tcc.android/databases/";
-	private static final String NOME_BANCO = "minhadieta.db";
+	private static final String NOME_BANCO = "databaseminhadieta.db";
 	private static final String TABELA_MINHA_DIETA = "minha_dieta";
+	public static String[] COLS = { "tipo_refeicao" };
 
 	private static final String COLUNA_ID = "id";
 	private static final String COLUNA_IDENTIFICACAO_DIETA = "identificacao_dieta";
@@ -20,6 +24,7 @@ public class MinhaDietaDAO extends SQLiteOpenHelper {
 	private static final String COLUNA_DURACAO_DIETA = "duracao_dieta";
 	private static final String COLUNA_HORARIO_REFEICAO = "horario_refeicao";
 	private static final String COLUNA_TIPO_REFEICAO = "tipo_refeicao";
+	private static final String COLUNA_DATA_DOWNLOAD = "data_download";
 	private static final String COLUNA_ALIMENTO_1 = "alimento_1";
 	private static final String COLUNA_ALIMENTO_2 = "alimento_2";
 	private static final String COLUNA_ALIMENTO_3 = "alimento_3";
@@ -41,6 +46,7 @@ public class MinhaDietaDAO extends SQLiteOpenHelper {
 				 + COLUNA_DURACAO_DIETA + " TEXT NOT NULL, "
 				 + COLUNA_HORARIO_REFEICAO + " TEXT NOT NULL, "
 				 + COLUNA_TIPO_REFEICAO + " TEXT NOT NULL, "
+				 + COLUNA_DATA_DOWNLOAD + " INTEGER NOT NULL, "
 				 + COLUNA_ALIMENTO_1 + " TEXT NOT NULL, " 
 				 + COLUNA_QUANTIDADE_1 + " TEXT NOT NULL, " 
 				 + COLUNA_ALIMENTO_2 + " TEXT, " 
@@ -83,6 +89,7 @@ public class MinhaDietaDAO extends SQLiteOpenHelper {
 		values.put(COLUNA_DURACAO_DIETA, minhaDieta.getDuracaoDieta());
 		values.put(COLUNA_HORARIO_REFEICAO, minhaDieta.getHorarioRefeicao());
 		values.put(COLUNA_TIPO_REFEICAO, minhaDieta.getTipoRefeicao());
+		values.put(COLUNA_DATA_DOWNLOAD, minhaDieta.getDataDownload());
 		values.put(COLUNA_ALIMENTO_1, minhaDieta.getAlimentos()[0]);
 		values.put(COLUNA_QUANTIDADE_1, minhaDieta.getQuantidades()[0]);
 		values.put(COLUNA_ALIMENTO_2, minhaDieta.getAlimentos()[1]);
@@ -97,6 +104,35 @@ public class MinhaDietaDAO extends SQLiteOpenHelper {
 			getWritableDatabase().insert(TABELA_MINHA_DIETA, null, values);
 			close();
 	}
+	
+
+	public ArrayList<String> getRefeicao(String categoria,
+			String horarioInicial, String horarioFinal) {
+		Cursor c = getWritableDatabase().rawQuery(
+				"SELECT UPPER(" + COLUNA_QUANTIDADE_1 + "||' - '||"
+						+ COLUNA_ALIMENTO_1 + ") FROM " + TABELA_MINHA_DIETA
+						+ " WHERE substr(" + COLUNA_HORARIO_REFEICAO
+						+ ",1,2)||substr(" + COLUNA_HORARIO_REFEICAO
+						+ ",4,5)||substr(" + COLUNA_HORARIO_REFEICAO
+						+ ",7,8)between '" + horarioInicial + "' AND '"
+						+ horarioFinal + "' AND " + COLUNA_TIPO_REFEICAO
+						+ " = '" + categoria + "' ORDER BY "
+						+ COLUNA_ALIMENTO_1 + " ASC", null);
+		ArrayList<String> refeicao = new ArrayList<String>();
+		while (c.moveToNext()) {
+			refeicao.add(c.getString(0));
+		}
+		close();
+		c.close();
+		return refeicao;
+	}
+
+	/*public AcompanhaDieta getAcompanhaDieta(String categoria,
+			String horarioInicial, String horarioFinal) {
+		Cursor c = getWritableDatabase().rawQuery(
+
+		return null;
+	}*/
 	
 	public boolean checkDataBase() {
 		SQLiteDatabase checkDB = null;
