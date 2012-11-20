@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import br.com.tcc.android.comunicacao.WebServiceTask;
+import br.com.tcc.android.dao.AcompanhaDietaDAO;
 import br.com.tcc.android.dao.PerfilDAO;
 
 public class TelaMenuActivity extends Activity implements
@@ -20,18 +22,24 @@ public class TelaMenuActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);// Mapeando a pagina
 												// activity_menu
-		
+
 		PerfilDAO dao = new PerfilDAO(this);
 		Perfil perfil = dao.getPerfil();
 		dao.close();
 		if (perfil.getIdPerfil() != null) {
+			AcompanhaDietaDAO acompanhaDao = new AcompanhaDietaDAO(this);
+			boolean acabouDieta = acompanhaDao.getAcabouDieta();
+			if (acabouDieta == true) {
+				WebServiceTask web = new WebServiceTask();				
+				web.enviarPerfil(perfil,acompanhaDao.getIdentificacaoDieta(),"http://192.168.2.102:8080"+ "/ServidorMobile/resource/mobile/perfil/atualizacao/"
+								+ acompanhaDao.getStatusDieta());
+			}
 			criarBotoes();
 		} else {
 			criaBotoesSemPerfil();
 		}
 
 	}
-		
 
 	public void criarBotoes() {
 		// Listener ira ouvir os eventos do botao
@@ -54,7 +62,6 @@ public class TelaMenuActivity extends Activity implements
 				startActivity(intent);
 			}
 		});
-	
 
 		buttonMinhaDieta = (Button) findViewById(R.id.buttonMinhaDieta);
 		buttonMinhaDieta.setOnClickListener(new View.OnClickListener() {
@@ -63,23 +70,23 @@ public class TelaMenuActivity extends Activity implements
 				Intent intent = new Intent(TelaMenuActivity.this,
 						TelaMinhaDietaActivity.class);
 				startActivity(intent);
-				
+
 			}
 		});
 	}
-	
+
 	private void criaBotoesSemPerfil() {
 		// Listener ira ouvir os eventos do botao
 		buttonEstatisticas = (Button) findViewById(R.id.buttonEstatisticas);
-		buttonEstatisticas.setOnClickListener(new View.OnClickListener(){
+		buttonEstatisticas.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-			Toast.makeText(
-					getBaseContext(),
-					"Não há Perfil Cadastrado,"
-							+ " clique em Perfil para cadastrar um Perfil!",
-					Toast.LENGTH_LONG).show();
-			}}
-		);
+				Toast.makeText(
+						getBaseContext(),
+						"Não há Perfil Cadastrado,"
+								+ " clique em Perfil para cadastrar um Perfil!",
+						Toast.LENGTH_LONG).show();
+			}
+		});
 
 		buttonPerfil = (Button) findViewById(R.id.buttonPerfil);
 		buttonPerfil.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +97,7 @@ public class TelaMenuActivity extends Activity implements
 				startActivity(intent);
 			}
 		});
-	
+
 		buttonMinhaDieta = (Button) findViewById(R.id.buttonMinhaDieta);
 		buttonMinhaDieta.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -104,12 +111,9 @@ public class TelaMenuActivity extends Activity implements
 		});
 	}
 
-
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
-
-

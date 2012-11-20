@@ -1,12 +1,17 @@
 package br.com.tcc.android.telas;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import java.util.Date;
 import br.com.tcc.android.R;
 import br.com.tcc.android.TelaEditarPerfilActivity;
 import br.com.tcc.android.TelaMinhaDietaActivity;
 import br.com.tcc.android.TelaPerfilActivity;
+import br.com.tcc.android.dao.AcompanhaDietaDAO;
 import br.com.tcc.android.dao.MinhaDietaDAO;
+import br.com.tcc.android.model.AcompanhaDieta;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -39,8 +44,8 @@ public class TelaRefeicaoPrincipalManha extends Activity {
 			AlertDialog.Builder dialogo = new AlertDialog.Builder(
 					TelaRefeicaoPrincipalManha.this);
 			dialogo.setTitle("AVISO");
-			dialogo.setMessage("Você não escolheu nenhuma dieta para seguir!" +
-					"Clique em VOLTAR, e acesse Mais Dietas para selecionar uma dieta!");
+			dialogo.setMessage("Você não escolheu nenhuma dieta para seguir!"
+					+ "Clique em VOLTAR, e acesse Mais Dietas para selecionar uma dieta!");
 			dialogo.setPositiveButton("VOLTAR",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
@@ -64,6 +69,41 @@ public class TelaRefeicaoPrincipalManha extends Activity {
 	public void criaBotoes() {
 
 		buttonEscolheRefManhaPrincipal = (Button) findViewById(R.id.buttonEscolheRefManhaPrincipal);
+		buttonEscolheRefManhaPrincipal
+				.setOnClickListener(new View.OnClickListener() {
+					public void onClick(View v) {
+						AcompanhaDieta acompanhaDieta = new AcompanhaDieta();
+						AcompanhaDietaDAO acompanhaDietaDao = new AcompanhaDietaDAO(
+								TelaRefeicaoPrincipalManha.this);
+						MinhaDietaDAO minhaDietaDAO = new MinhaDietaDAO(
+								TelaRefeicaoPrincipalManha.this);
+						acompanhaDieta = minhaDietaDAO.getAcompanhaDieta(
+								categoria, horarioInicial, horarioFinal);
+						minhaDietaDAO.close();
+						SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+						String dataInicio = acompanhaDieta.getDataInicio();
+						try {
+							Date data = sd.parse(dataInicio);
+							Date dataAtual = new Date(); // data atual
+							Calendar calInicio = Calendar.getInstance();
+							calInicio.setTime(data);
+							Calendar calAtual = Calendar.getInstance();
+							calAtual.setTime(dataAtual);
+							acompanhaDieta.setDiaDieta(diferencaEmDias(
+									calInicio, calAtual));
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+
+						acompanhaDietaDao.adicionar(acompanhaDieta);
+						acompanhaDietaDao.close();
+						Intent intent = new Intent(
+								TelaRefeicaoPrincipalManha.this,
+								TelaMinhaDietaActivity.class);
+						startActivity(intent);
+
+					}
+				});
 
 		buttonVoltarRefPrincipalManha = (Button) findViewById(R.id.buttonVoltarRefPrincipalManha);
 		buttonVoltarRefPrincipalManha
@@ -76,5 +116,11 @@ public class TelaRefeicaoPrincipalManha extends Activity {
 
 					}
 				});
+	}
+
+	public static int diferencaEmDias(Calendar c1, Calendar c2) {
+		long m1 = c1.getTimeInMillis();
+		long m2 = c2.getTimeInMillis();
+		return (int) ((m2 - m1) / (24 * 60 * 60 * 1000));
 	}
 }

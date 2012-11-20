@@ -1,7 +1,6 @@
 package br.com.tcc.android.model;
 
 
-
 public class MinhaDieta {
 
 	private Integer id;
@@ -13,7 +12,7 @@ public class MinhaDieta {
 	private String dataDownload;
 	private String[] alimentos;
 	private String[] quantidades;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -56,6 +55,7 @@ public class MinhaDieta {
 	public void setDataDownload(String hojeFormatado) {
 		this.dataDownload = hojeFormatado;
 	}
+
 	public String[] getAlimentos() {
 		return alimentos;
 	}

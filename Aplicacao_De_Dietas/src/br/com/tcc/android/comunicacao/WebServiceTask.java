@@ -38,8 +38,8 @@ import br.com.tcc.android.Perfil;
 public class WebServiceTask {
 
 	private static final String TAG = "TelaMaisDietasActivity";
-	private static final int CONN_TIMEOUT = 7000;
-	private static final int SOCKET_TIMEOUT = 10000;
+	private static final int CONN_TIMEOUT = 20000;
+	private static final int SOCKET_TIMEOUT = 30000;
 
 	public String getXMLFromUrl(String url) {
 		System.out.println("REQUISITANDO XML DA URL: " + url);

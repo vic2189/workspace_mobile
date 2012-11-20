@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import br.com.tcc.android.model.AcompanhaDieta;
 import br.com.tcc.android.model.MinhaDieta;
 
 public class MinhaDietaDAO extends SQLiteOpenHelper {
@@ -46,7 +47,7 @@ public class MinhaDietaDAO extends SQLiteOpenHelper {
 				 + COLUNA_DURACAO_DIETA + " TEXT NOT NULL, "
 				 + COLUNA_HORARIO_REFEICAO + " TEXT NOT NULL, "
 				 + COLUNA_TIPO_REFEICAO + " TEXT NOT NULL, "
-				 + COLUNA_DATA_DOWNLOAD + " INTEGER NOT NULL, "
+				 + COLUNA_DATA_DOWNLOAD + " TEXT NOT NULL, "
 				 + COLUNA_ALIMENTO_1 + " TEXT NOT NULL, " 
 				 + COLUNA_QUANTIDADE_1 + " TEXT NOT NULL, " 
 				 + COLUNA_ALIMENTO_2 + " TEXT, " 
@@ -106,7 +107,7 @@ public class MinhaDietaDAO extends SQLiteOpenHelper {
 	}
 	
 
-	public ArrayList<String> getRefeicao(String categoria,
+public ArrayList<String> getRefeicao(String categoria,
 			String horarioInicial, String horarioFinal) {
 		Cursor c = getWritableDatabase().rawQuery(
 				"SELECT UPPER(" + COLUNA_QUANTIDADE_1 + "||' - '||"
@@ -127,12 +128,33 @@ public class MinhaDietaDAO extends SQLiteOpenHelper {
 		return refeicao;
 	}
 
-	/*public AcompanhaDieta getAcompanhaDieta(String categoria,
+	public AcompanhaDieta getAcompanhaDieta(String categoria,
 			String horarioInicial, String horarioFinal) {
 		Cursor c = getWritableDatabase().rawQuery(
-
-		return null;
-	}*/
+				"SELECT DISTINCT " + COLUNA_NOME_DIETA + ","
+						+ COLUNA_IDENTIFICACAO_DIETA +","
+						+ COLUNA_DATA_DOWNLOAD + " AS DATA_INICIO,"
+						+ COLUNA_HORARIO_REFEICAO + "," + COLUNA_DURACAO_DIETA
+						+ "," + COLUNA_TIPO_REFEICAO + " FROM "
+						+ TABELA_MINHA_DIETA + " WHERE SUBSTR("
+						+ COLUNA_HORARIO_REFEICAO + ",1,2)||SUBSTR("
+						+ COLUNA_HORARIO_REFEICAO + ",4,5)||SUBSTR("
+						+ COLUNA_HORARIO_REFEICAO + ",7,8) BETWEEN '"
+						+ horarioInicial + "' AND '" + horarioFinal + "' AND "
+						+ COLUNA_TIPO_REFEICAO + " = '" + categoria+"'", null);
+		AcompanhaDieta acompanhaDieta = new AcompanhaDieta();
+		if (c.moveToNext()) {
+			acompanhaDieta.setNomeDieta(c.getString(0));
+			acompanhaDieta.setIdentificacaoDieta(c.getString(1));
+			acompanhaDieta.setDataInicio(c.getString(2));
+			acompanhaDieta.setHorarioRefeicao(c.getString(3));
+			acompanhaDieta.setDuracaoDieta(c.getInt(4));
+			acompanhaDieta.setRefeicaoEscolida(c.getString(5));
+		}
+		c.close();
+		close();
+		return acompanhaDieta;
+	}
 	
 	public boolean checkDataBase() {
 		SQLiteDatabase checkDB = null;

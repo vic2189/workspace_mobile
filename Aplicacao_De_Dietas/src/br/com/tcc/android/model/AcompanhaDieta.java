@@ -2,18 +2,36 @@ package br.com.tcc.android.model;
 
 public class AcompanhaDieta {
 
-	public String idNomeDieta;
+	public String nomeDieta;
+	public String identificacaoDieta;
 	public String dataInicio;
 	public String horarioRefeicao;
 	public String refeicaoEscolida;
 	public Integer diaDieta;
+	public Integer duracaoDieta;
 
-	public String getIdNomeDieta() {
-		return idNomeDieta;
+	public Integer getDuracaoDieta() {
+		return duracaoDieta;
 	}
 
-	public void setIdNomeDieta(String idNomeDieta) {
-		this.idNomeDieta = idNomeDieta;
+	public void setDuracaoDieta(Integer duracaoDieta) {
+		this.duracaoDieta = duracaoDieta;
+	}
+
+	public String getIdentificacaoDieta() {
+		return identificacaoDieta;
+	}
+
+	public void setIdentificacaoDieta(String identificacaoDieta) {
+		this.identificacaoDieta = identificacaoDieta;
+	}
+
+	public String getNomeDieta() {
+		return nomeDieta;
+	}
+
+	public void setNomeDieta(String nomeDieta) {
+		this.nomeDieta = nomeDieta;
 	}
 
 	public String getDataInicio() {
