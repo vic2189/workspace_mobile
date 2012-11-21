@@ -2,7 +2,7 @@ package br.com.tcc.android.dao;
 
 import java.util.Random;
 
-import br.com.tcc.android.Perfil;
+import br.com.tcc.android.model.Perfil;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -64,7 +64,7 @@ public class PerfilDAO extends SQLiteOpenHelper {
 			COLUNA_ID_PERFIL + " = " + dadosPerfil.getIdPerfil(), null);
 		}else{
 			Random random = new Random();
-			int id = random.nextInt();
+			int id = random.nextInt(100000000);
 			dadosPerfil.setIdPerfil(id);
 		}
 

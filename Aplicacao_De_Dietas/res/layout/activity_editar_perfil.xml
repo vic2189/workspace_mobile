@@ -160,26 +160,8 @@
         android:maxLength="3" />
 
     <Button
-        android:id="@+id/buttonCancelar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textPeso"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="360dp"
-        android:text="CANCELAR"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
-
-    <Button
         android:id="@+id/buttonSalvar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="42dp"
-        android:layout_marginTop="360dp"
-        android:text=" SALVAR "
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:typeface="serif" />
+        android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_marginTop="360dp" android:text=" SALVAR " android:textSize="18dp" android:textStyle="bold" android:typeface="serif"/>
 
 </RelativeLayout>

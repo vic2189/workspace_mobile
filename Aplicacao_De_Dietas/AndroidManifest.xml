@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".TelaMenuActivity"
+            android:name=".telas.TelaMenuActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,24 +26,24 @@
         </activity>
         
          <activity
-            android:name=".TelaEstatisticasActivity"
+            android:name=".telas.TelaEstatisticasActivity"
             android:label="@string/app_name" />
          
          <activity
-            android:name=".TelaMaisDietasActivity"
+            android:name=".telas.TelaMaisDietasActivity"
             android:label="@string/app_name" />
          
                   
          <activity
-            android:name=".TelaMinhaDietaActivity"
+            android:name=".telas.TelaMinhaDietaActivity"
             android:label="@string/app_name" />
         
          <activity
-            android:name=".TelaPerfilActivity"
+            android:name=".telas.TelaPerfilActivity"
             android:label="@string/app_name" />   
             
          <activity
-            android:name=".TelaEditarPerfilActivity"
+            android:name=".telas.TelaEditarPerfilActivity"
             android:label="@string/app_name" />
          
          <activity android:name="org.achartengine.GraphicalActivity" />   

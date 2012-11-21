@@ -3,14 +3,11 @@
 	android:layout_width="match_parent" android:layout_height="match_parent"
 	android:orientation="vertical">
 <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical">
     <TextView android:id="@+id/textViewRefeicaoPrincipal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:background="#33CC33" android:gravity="center_vertical|center_horizontal" android:text="Refeição Principal" android:textColor="#FFFFFF" android:textSize="20dp" android:textStyle="bold" android:typeface="serif"/>
-    <ListView android:id="@+id/listViewAlimentosPrincipalTarde" android:layout_width="fill_parent" android:layout_height="319dp"></ListView>
+    <ListView android:id="@+id/listViewAlimentosPrincipalTarde" android:layout_width="fill_parent" android:layout_height="320dp"></ListView>
     <Button android:id="@+id/buttonEscolheRefPrincipalTarde" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="ESCOLHER REFEIÇÃO" android:textSize="18dp" android:textStyle="bold" android:typeface="serif"/>
-    <Button android:id="@+id/buttonVoltarRefPrincipalTarde" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="VOLTAR" android:textSize="18dp" android:textStyle="bold" android:typeface="serif"/>
     
 </LinearLayout>
 </ScrollView>

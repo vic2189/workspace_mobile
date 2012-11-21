@@ -2,7 +2,7 @@ package br.com.tcc.android;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
+
 
 public class MainActivity extends Activity {//Toda classe para aplicação Android,deve derivada da classe Activity (Atividade)
 

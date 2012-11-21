@@ -1,12 +1,12 @@
-package br.com.tcc.android;
+package br.com.tcc.android.telas;
 
 
+import br.com.tcc.android.R;
 import br.com.tcc.android.dao.PerfilDAO;
+import br.com.tcc.android.model.Perfil;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,7 +21,6 @@ public class TelaEditarPerfilActivity extends Activity {
 	editTextPeso;
 	Spinner spinnerGenero;
 	private Button buttonSalvar;
-	private Button buttonCancelar;
 
 
 
@@ -85,20 +84,10 @@ public class TelaEditarPerfilActivity extends Activity {
 				Intent intent = new Intent(TelaEditarPerfilActivity.this,
 						TelaPerfilActivity.class);
 				startActivity(intent);
-
+				finish();
 			}
 		});
-
-		buttonCancelar = (Button) findViewById(R.id.buttonCancelar);
-		buttonCancelar.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-				Intent intent = new Intent(TelaEditarPerfilActivity.this,
-						TelaPerfilActivity.class);
-				startActivity(intent);
-			}
-		});
-
+		
 	}
 
 	private int getPosicao(Perfil perfil) {

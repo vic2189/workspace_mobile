@@ -1,4 +1,4 @@
-package br.com.tcc.android;
+package br.com.tcc.android.model;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package br.com.tcc.android;
+package br.com.tcc.android.telas;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,11 +24,14 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import br.com.tcc.android.CustomAdapter;
+import br.com.tcc.android.R;
 import br.com.tcc.android.comunicacao.WebServiceTask;
 import br.com.tcc.android.dao.AcompanhaDietaDAO;
 import br.com.tcc.android.dao.MinhaDietaDAO;
 import br.com.tcc.android.dao.PerfilDAO;
 import br.com.tcc.android.model.MinhaDieta;
+import br.com.tcc.android.model.Perfil;
 
 public class TelaMaisDietasActivity extends Activity{
 

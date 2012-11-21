@@ -11,7 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 
-public class GraficoPizza {
+public class GraficoRefeicaoEscolida {
 
 	private Integer quantidadePrincipal,quantidadeOpcional,diasSeguidosDieta;
 	private String[] categoria = {"PRINCIPAL","OPCIONAL"};
@@ -22,14 +22,14 @@ public class GraficoPizza {
 		quantidadePrincipal = dao.getquantidadeRefeicao(categoria[0]);
 		quantidadeOpcional = dao.getquantidadeRefeicao(categoria[1]);
 		diasSeguidosDieta = dao.getDiasSeguidosDieta();
+		if(diasSeguidosDieta == 0){
+			diasSeguidosDieta = 1;
+		}
 		quantidadePrincipal = quantidadePrincipal * 100 / diasSeguidosDieta;
 		quantidadeOpcional = quantidadeOpcional  * 100 / diasSeguidosDieta;
 		series.add(quantidadePrincipal+"%"+" REFEIÇÃO PRINCIPAL",quantidadePrincipal);
 		series.add(quantidadeOpcional+"%"+" REFEIÇÃO OPCIONAL",quantidadeOpcional);
 		
-
-		int[] colors = new int[] { Color.BLUE, Color.GREEN, Color.MAGENTA, Color.YELLOW, Color.CYAN };
-
 		DefaultRenderer renderer = new DefaultRenderer();
 		SimpleSeriesRenderer r = new SimpleSeriesRenderer();
 		r.setColor(Color.BLUE);
@@ -38,6 +38,7 @@ public class GraficoPizza {
 		r2.setColor(Color.GREEN);
 		renderer.addSeriesRenderer(r2);
 		
+		renderer.setShowLabels(false);
 		renderer.setChartTitle("PORCENTAGEM DA ESCOLHA DE REFEIÇÃO");
 		renderer.setChartTitleTextSize(15);
 		renderer.setLabelsColor(Color.BLACK);

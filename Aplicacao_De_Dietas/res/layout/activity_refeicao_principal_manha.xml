@@ -16,6 +16,5 @@
  android:layout_height="319dp" >
  </ListView>
 <Button android:id="@+id/buttonEscolheRefManhaPrincipal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="ESCOLHER REFEIÇÃO" android:textSize="18dp" android:textStyle="bold" android:typeface="serif"/>
-<Button android:id="@+id/buttonVoltarRefPrincipalManha" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="VOLTAR" android:textSize="18dp" android:textStyle="bold" android:typeface="serif"/>
 </LinearLayout>
 </ScrollView>

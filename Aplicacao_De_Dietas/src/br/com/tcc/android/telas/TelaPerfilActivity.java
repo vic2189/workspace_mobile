@@ -1,6 +1,8 @@
-package br.com.tcc.android;
+package br.com.tcc.android.telas;
 
+import br.com.tcc.android.R;
 import br.com.tcc.android.dao.PerfilDAO;
+import br.com.tcc.android.model.Perfil;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +16,7 @@ public class TelaPerfilActivity extends Activity {
 	TextView textMostraNome, textMostraEmail, textMostraIdade,
 			textMostraAltura, textMostraPeso, textMostraGenero;
 	private Button buttonEditarPerfil;
-	private Button buttonVoltar;
+
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,17 +59,11 @@ public class TelaPerfilActivity extends Activity {
 				Intent intent = new Intent(TelaPerfilActivity.this,
 						TelaEditarPerfilActivity.class);
 				startActivity(intent);
+				finish();
 
 			}
 		});
-		buttonVoltar = (Button) findViewById(R.id.buttonVoltar);
-		buttonVoltar.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(TelaPerfilActivity.this,
-						TelaMenuActivity.class);
-				startActivity(intent);
-			}
-		});
+		
 
 	}
 }

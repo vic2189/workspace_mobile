@@ -19,8 +19,7 @@
 		<TextView android:id="@+id/textDietaAtual"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:layout_alignParentLeft="true"
-			android:layout_alignParentRight="true" android:layout_below="@+id/buttonMaisDietas"
-			android:layout_marginTop="35dp" android:background="#33CC33" android:text="DIETA ATUAL:" android:textAppearance="?android:attr/textAppearanceMedium" android:textColor="#FFFFFF" android:textSize="15dp" android:textStyle="bold" android:typeface="serif"/>
+			android:layout_alignParentRight="true" android:layout_below="@+id/textViewSelecaoNoite" android:background="#33CC33" android:text="DIETA ATUAL:" android:textAppearance="?android:attr/textAppearanceMedium" android:textColor="#FFFFFF" android:textSize="15dp" android:textStyle="bold" android:typeface="serif"/>
 		
 		<TextView android:id="@+id/textManha" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:layout_alignParentLeft="true"
@@ -51,6 +50,11 @@
 		<ListView android:id="@+id/listViewRefeicaoManha" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_above="@+id/textNoite" android:layout_alignParentLeft="true" android:layout_below="@+id/textManha"></ListView>
 		<TextView android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_below="@+id/textNoite" android:layout_marginTop="95dp" android:background="#99FF33"/>
 		<ListView android:id="@+id/listViewRefeicaoNoite" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_alignBottom="@+id/textView1" android:layout_alignParentLeft="true" android:layout_below="@+id/textNoite"></ListView>
+		<TextView android:id="@+id/textViewSelecaoTarde" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_below="@+id/textViewSelecaoManha" android:background="#99FF33" android:text="REFEIÇÃO SELECIONADA TARDE:NENHUMA" android:typeface="serif"/>
+		<TextView android:id="@+id/textViewDiasDecoridos" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_below="@+id/textViewDuracaoDieta" android:background="#99FF33" android:text="DIAS DECORRIDOS:" android:typeface="serif"/>
+		<TextView android:id="@+id/textViewSelecaoManha" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_below="@+id/textViewDiasDecoridos" android:background="#99FF33" android:text="REFEIÇÃO SELECIONADA MANHA:NENHUMA" android:typeface="serif"/>
+		<TextView android:id="@+id/textViewDuracaoDieta" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_below="@+id/buttonMaisDietas" android:layout_marginTop="22dp" android:background="#99FF33" android:text="DURAÇÃO DIETA:" android:typeface="serif"/>
+		<TextView android:id="@+id/textViewSelecaoNoite" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_below="@+id/textViewSelecaoTarde" android:background="#99FF33" android:text="REFEIÇÃO SELECIONADA NOITE:NENHUMA" android:typeface="serif"/>
 
 </RelativeLayout>
 </ScrollView>

@@ -10,7 +10,6 @@ import br.com.tcc.android.model.AcompanhaDieta;
 public class AcompanhaDietaDAO extends SQLiteOpenHelper {
 
 	private static int DATABASE_VERSION = 1;
-	private static String DB_PATH = "/data/data/br.com.tcc.android/databases/";
 	public static String TABELA_ACOMPANHA_DIETA = "acompanha_dieta";
 	private static final String NOME_BANCO = "acompanhadieta.db";
 
@@ -30,6 +29,9 @@ public class AcompanhaDietaDAO extends SQLiteOpenHelper {
 			+ COLUNA_REFEICAO_ESCOLIDA + " TEXT NULL, " + COLUNA_DIA
 			+ " INTERGER NOT NULL, " + COLUNA_DURACAO_DIETA
 			+ " INTERGER NOT NULL );";
+	
+	private static final String DELETE_ACOMPANHA_DIETA = "DELETE FROM " 
+			+ TABELA_ACOMPANHA_DIETA + " WHERE ";
 
 	public AcompanhaDietaDAO(Context context) {
 		super(context, NOME_BANCO, null, DATABASE_VERSION);
@@ -49,25 +51,48 @@ public class AcompanhaDietaDAO extends SQLiteOpenHelper {
 
 	}
 
+//	public void adicionar(AcompanhaDieta acompanhamento) {
+//		getWritableDatabase().delete(TABELA_ACOMPANHA_DIETA,
+//				COLUNA_DIA + " = " + acompanhamento.getDiaDieta(), null);
+//		ContentValues values = new ContentValues();
+//		close();
+//		values.put(COLUNA_NOME_DIETA, acompanhamento.getNomeDieta());
+//		values.put(COLUNA_IDENTIFICACAO_DIETA,
+//				acompanhamento.getIdentificacaoDieta());
+//		values.put(COLUNA_DATA_INICIO, acompanhamento.getDataInicio());
+//		values.put(COLUNA_HORARIO_REFEICAO, acompanhamento.getHorarioRefeicao());
+//		values.put(COLUNA_REFEICAO_ESCOLIDA,
+//				acompanhamento.getRefeicaoEscolida());
+//		values.put(COLUNA_DIA, acompanhamento.getDiaDieta());
+//		values.put(COLUNA_DURACAO_DIETA, acompanhamento.getDuracaoDieta());
+//
+//		getWritableDatabase().insert(TABELA_ACOMPANHA_DIETA, null, values);
+//		close();
+//	}
+
+	
 	public void adicionar(AcompanhaDieta acompanhamento) {
-		getWritableDatabase().delete(TABELA_ACOMPANHA_DIETA,
-				COLUNA_DIA + " = " + acompanhamento.getDiaDieta(), null);
+//		getWritableDatabase().delete(TABELA_ACOMPANHA_DIETA,
+//		COLUNA_DIA + " = " + acompanhamento.getDiaDieta() + " AND " +
+//		COLUNA_HORARIO_REFEICAO+" = "+acompanhamento.getHorarioRefeicao() , null);
+		
+		getWritableDatabase().execSQL("DELETE FROM " + TABELA_ACOMPANHA_DIETA + " WHERE " + COLUNA_DIA + " = " + acompanhamento.getDiaDieta()
+				+ " AND " + COLUNA_HORARIO_REFEICAO + " = " + "'" + acompanhamento.getHorarioRefeicao() + "'");
 		ContentValues values = new ContentValues();
 		close();
 		values.put(COLUNA_NOME_DIETA, acompanhamento.getNomeDieta());
 		values.put(COLUNA_IDENTIFICACAO_DIETA,
-				acompanhamento.getIdentificacaoDieta());
+		acompanhamento.getIdentificacaoDieta());
 		values.put(COLUNA_DATA_INICIO, acompanhamento.getDataInicio());
 		values.put(COLUNA_HORARIO_REFEICAO, acompanhamento.getHorarioRefeicao());
 		values.put(COLUNA_REFEICAO_ESCOLIDA,
-				acompanhamento.getRefeicaoEscolida());
+		acompanhamento.getRefeicaoEscolida());
 		values.put(COLUNA_DIA, acompanhamento.getDiaDieta());
 		values.put(COLUNA_DURACAO_DIETA, acompanhamento.getDuracaoDieta());
 
 		getWritableDatabase().insert(TABELA_ACOMPANHA_DIETA, null, values);
 		close();
-	}
-
+		}
 	public int getquantidadeRefeicao(String refeicao_escolida) {
 		Cursor c = getWritableDatabase().rawQuery(
 				"SELECT COUNT(" + COLUNA_REFEICAO_ESCOLIDA + ") FROM "
@@ -83,7 +108,7 @@ public class AcompanhaDietaDAO extends SQLiteOpenHelper {
 		return quantidadeRefeicao;
 	}
 
-	public int getdiasSeguidosDieta() {
+	public int getDiasSeguidosDieta() {
 		Cursor c = getWritableDatabase().rawQuery(
 				"SELECT COUNT(" + COLUNA_NOME_DIETA + ") FROM "
 						+ TABELA_ACOMPANHA_DIETA, null);
@@ -96,45 +121,28 @@ public class AcompanhaDietaDAO extends SQLiteOpenHelper {
 		return diasSeguidosDieta;
 	}
 
-	public boolean getAcabouDieta() {
+	public String getDataInicio() {
 		Cursor c = getWritableDatabase().rawQuery(
-				"SELECT " + COLUNA_DURACAO_DIETA + " - MAX(" + COLUNA_DIA
-						+ ") FROM " + TABELA_ACOMPANHA_DIETA, null);
-		int teste = 1;
-		boolean acabouDieta = false;
+				"SELECT " + COLUNA_DATA_INICIO + " FROM " + TABELA_ACOMPANHA_DIETA, null);
+		String dataInicio = "";
 		if (c.moveToNext()) {
-			teste = c.getInt(0);
-		}
-		if (teste == 0) {
-			acabouDieta = true;
-		}
+			dataInicio = c.getString(0);
+		}		
 		close();
 		c.close();
-		return acabouDieta;
+		return dataInicio;
 	}
 
-	public String getIdentificacaoDieta() {
-		Cursor c = getWritableDatabase().rawQuery(
-				"SELECT " + COLUNA_IDENTIFICACAO_DIETA + " FROM "
-						+ TABELA_ACOMPANHA_DIETA, null);
-		String identificacaoDieta = "0";
-		if (c.moveToNext()) {
-			identificacaoDieta = c.getString(0);
-		}
-		close();
-		c.close();
-		return identificacaoDieta;
-	}
 
 	public String getStatusDieta() {
 		Cursor c = getWritableDatabase().rawQuery(
-				"SELECT COUNT(" + COLUNA_IDENTIFICACAO_DIETA + ")- MAX("
-						+ COLUNA_DIA + ")*3" + " FROM "
+				"SELECT COUNT(" + COLUNA_NOME_DIETA + ") * 100 /( "
+						+ COLUNA_DURACAO_DIETA + "* 3)" + " FROM "
 						+ TABELA_ACOMPANHA_DIETA, null);
 		String statusDieta = "NÃO FEITA";
 		if (c.moveToNext()) {
 			int compara = c.getInt(0);
-			if(compara == 0){
+			if(compara > 50){
 				statusDieta = "FEITA";
 			}
 		}
@@ -143,6 +151,22 @@ public class AcompanhaDietaDAO extends SQLiteOpenHelper {
 		return statusDieta;
 
 	}
+public String getRefeicaoEscolida(int diaDieta, String horarioInicial, String horarioFinal ){
+	Cursor c = getWritableDatabase().rawQuery(
+			"SELECT " + COLUNA_REFEICAO_ESCOLIDA + " FROM "	+ TABELA_ACOMPANHA_DIETA +
+			" WHERE "+ COLUNA_DIA +" = "+ diaDieta +" AND SUBSTR("
+					+ COLUNA_HORARIO_REFEICAO + ",1,2)||SUBSTR("
+					+ COLUNA_HORARIO_REFEICAO + ",4,5)||SUBSTR("
+					+ COLUNA_HORARIO_REFEICAO + ",7,8) BETWEEN '"
+					+ horarioInicial + "' AND '" + horarioFinal+"'", null);
+	String refeicaoEscolida = "NENHUMA";
+	if (c.moveToNext()) {
+		refeicaoEscolida = c.getString(0);
+	}		
+	close();
+	c.close();
+	return refeicaoEscolida;
+}
 
 	public void deletarTodosRegistros() {
 		getWritableDatabase().delete(TABELA_ACOMPANHA_DIETA, null, null);

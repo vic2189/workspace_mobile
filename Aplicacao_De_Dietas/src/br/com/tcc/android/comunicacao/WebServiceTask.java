@@ -32,8 +32,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import android.util.Log;
-import br.com.tcc.android.Perfil;
-
+import br.com.tcc.android.model.*;
 
 public class WebServiceTask {
 
@@ -49,7 +48,8 @@ public class WebServiceTask {
 			HttpGet httpget = new HttpGet(url);
 			HttpResponse response = httpclient.execute(httpget);
 
-			System.out.println("RESPOSTA DA REQUISICAO DO DOWNLOAD:" + response.getStatusLine().getStatusCode());
+			System.out.println("RESPOSTA DA REQUISICAO DO DOWNLOAD:"
+					+ response.getStatusLine().getStatusCode());
 
 			HttpEntity httpEntity = response.getEntity();
 			xml = EntityUtils.toString(httpEntity);
@@ -58,42 +58,41 @@ public class WebServiceTask {
 		} catch (Exception e) {
 			Log.e(TAG, e.getLocalizedMessage(), e);
 			return null;
-		}finally{
+		} finally {
 			httpclient.getConnectionManager().closeExpiredConnections();
 		}
 	}
 
-	public boolean enviarPerfil(Perfil perfil, String idDietaEscolhida, String url) {
+	public boolean enviarPerfil(Perfil perfil, String idDietaEscolhida,
+			String url) {
 		JSONStringer jsonObject = new JSONStringer();
 		HttpClient httpClient = new DefaultHttpClient();
 		try {
-			jsonObject.object()
-			.key("idPerfil").value(perfil.getIdPerfil())
-			.key("idDieta").value(idDietaEscolhida)
-			.key("nome").value(perfil.getNome())
-			.key("idade").value(perfil.getIdade())
-			.key("genero").value(perfil.getGenero())
-			.key("altura").value(perfil.getAltura())
-			.key("peso").value(perfil.getPeso())
-			.key("email").value(perfil.getEmail())
-			.endObject();
-
+			jsonObject.object().key("idPerfil").value(perfil.getIdPerfil())
+					.key("idDieta").value(idDietaEscolhida).key("nome")
+					.value(perfil.getNome()).key("idade")
+					.value(perfil.getIdade()).key("genero")
+					.value(perfil.getGenero()).key("altura")
+					.value(perfil.getAltura()).key("peso")
+					.value(perfil.getPeso()).key("email")
+					.value(perfil.getEmail()).endObject();
 
 			String json = jsonObject.toString();
 
-
 			System.out.println("Enviando JSON: " + json);
 			System.out.println("URL: " + url);
-
 
 			HttpPost httpPost = new HttpPost(new URI(url));
 			httpPost.setHeader("Content-type", "application/json");
 			StringEntity sEntity = new StringEntity(json, "UTF-8");
 			httpPost.setEntity(sEntity);
 			HttpResponse response = httpClient.execute(httpPost);
-			System.out.println("RESPOSTA DO ENVIO DO PERFIL:" + response.getStatusLine().getStatusCode());
 
-			return true;
+			int codigoResposta = response.getStatusLine().getStatusCode();
+
+			System.out.println("RESPOSTA DO ENVIO DO PERFIL:" + codigoResposta);
+
+			return codigoResposta == 200;
 
 		} catch (JSONException e) {
 			Log.e(TAG, "Falha ao enviar JSON", e);
@@ -105,14 +104,14 @@ public class WebServiceTask {
 			Log.e(TAG, "Falha ao enviar JSON", e);
 		} catch (IOException e) {
 			Log.e(TAG, "Falha ao enviar JSON", e);
-		}finally{
+		} finally {
 			httpClient.getConnectionManager().closeExpiredConnections();
 		}
 
 		return false;
 	}
 
-	public Document getDomElement(String xml){
+	public Document getDomElement(String xml) {
 		Document doc = null;
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
@@ -121,7 +120,7 @@ public class WebServiceTask {
 
 			InputSource is = new InputSource();
 			is.setCharacterStream(new StringReader(xml));
-			doc = db.parse(is); 
+			doc = db.parse(is);
 
 		} catch (ParserConfigurationException e) {
 			Log.e("Error: ", e.getMessage());
@@ -152,17 +151,18 @@ public class WebServiceTask {
 		return this.getElementValue(n.item(0));
 	}
 
-	public final String getElementValue( Node elem ) {
+	public final String getElementValue(Node elem) {
 		Node child;
-		if( elem != null){
-			if (elem.hasChildNodes()){
-				for( child = elem.getFirstChild(); child != null; child = child.getNextSibling() ){
-					if( child.getNodeType() == Node.TEXT_NODE  ){
+		if (elem != null) {
+			if (elem.hasChildNodes()) {
+				for (child = elem.getFirstChild(); child != null; child = child
+						.getNextSibling()) {
+					if (child.getNodeType() == Node.TEXT_NODE) {
 						return child.getNodeValue();
 					}
 				}
 			}
 		}
 		return "";
-	} 
+	}
 }

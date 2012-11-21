@@ -47,7 +47,7 @@ public class MinhaDietaDAO extends SQLiteOpenHelper {
 				 + COLUNA_DURACAO_DIETA + " TEXT NOT NULL, "
 				 + COLUNA_HORARIO_REFEICAO + " TEXT NOT NULL, "
 				 + COLUNA_TIPO_REFEICAO + " TEXT NOT NULL, "
-				 + COLUNA_DATA_DOWNLOAD + " TEXT NOT NULL, "
+				 + COLUNA_DATA_DOWNLOAD + " INTEGER NOT NULL, "
 				 + COLUNA_ALIMENTO_1 + " TEXT NOT NULL, " 
 				 + COLUNA_QUANTIDADE_1 + " TEXT NOT NULL, " 
 				 + COLUNA_ALIMENTO_2 + " TEXT, " 
@@ -154,6 +154,61 @@ public ArrayList<String> getRefeicao(String categoria,
 		c.close();
 		close();
 		return acompanhaDieta;
+	}
+	public boolean getPossuiDieta(){
+		Cursor c = getWritableDatabase().rawQuery("SELECT * FROM "+TABELA_MINHA_DIETA,null);
+		boolean existe = false;
+		if(c.moveToNext()){
+		existe = true;	
+		}
+		close();
+		c.close();
+		return existe;
+	}
+	public String getDataInicio(){
+		Cursor c = getWritableDatabase().rawQuery(
+				"SELECT " + COLUNA_DATA_DOWNLOAD + " FROM " + TABELA_MINHA_DIETA, null);
+		String dataInicio = "";
+		if (c.moveToNext()) {
+			dataInicio = c.getString(0);
+		}		
+		close();
+		c.close();
+		return dataInicio;
+	}
+	
+	public int getPeriodoDieta(){
+		Cursor c = getWritableDatabase().rawQuery(
+				"SELECT " + COLUNA_DURACAO_DIETA + " FROM " + TABELA_MINHA_DIETA, null);
+		int duracaoDieta = 0;
+		if (c.moveToNext()) {
+			duracaoDieta = c.getInt(0);
+		}		
+		close();
+		c.close();
+		return duracaoDieta;
+	}
+	public String getIdentificacaoDieta(){
+		Cursor c = getWritableDatabase().rawQuery(
+				"SELECT " + COLUNA_IDENTIFICACAO_DIETA + " FROM " + TABELA_MINHA_DIETA, null);
+		String identificacaoDieta = "";
+		if (c.moveToNext()) {
+			identificacaoDieta = c.getString(0);
+		}		
+		close();
+		c.close();
+		return identificacaoDieta;
+	}
+	public String getNomeDieta(){
+		Cursor c = getWritableDatabase().rawQuery(
+				"SELECT " + COLUNA_NOME_DIETA + " FROM " + TABELA_MINHA_DIETA, null);
+		String identificacaoDieta = "";
+		if (c.moveToNext()) {
+			identificacaoDieta = c.getString(0);
+		}		
+		close();
+		c.close();
+		return identificacaoDieta;
 	}
 	
 	public boolean checkDataBase() {

@@ -1,5 +1,6 @@
-package br.com.tcc.android;
+package br.com.tcc.android.telas;
 
+import br.com.tcc.android.R;
 import br.com.tcc.android.graficos.*;
 import android.app.Activity;
 import android.content.Intent;
@@ -16,27 +17,30 @@ import android.widget.Button;
 
 public class TelaEstatisticasActivity extends Activity {
 
-	private Button buttonLineGraph,buttonVoltarEstatistica;
+	private Button buttonGraficoEscolidas,buttonGraficoSeguidas;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_estatisticas);
-		buttonLineGraph = (Button) findViewById(R.id.buttonGraficoCircular);
-		buttonLineGraph.setOnClickListener(new View.OnClickListener(){
+		buttonGraficoEscolidas = (Button) findViewById(R.id.buttonGraficoEscolidas);
+		buttonGraficoEscolidas.setOnClickListener(new View.OnClickListener(){
 
 			public void onClick(View v) {
-				GraficoPizza line = new GraficoPizza();
+				GraficoRefeicaoEscolida line = new GraficoRefeicaoEscolida();
 				Intent lineIntent = line.getIntent(TelaEstatisticasActivity.this);
 				startActivity(lineIntent);
+				
 			}
 		});
-		buttonVoltarEstatistica = (Button) findViewById(R.id.buttonVoltarEstatistica);
-		buttonVoltarEstatistica.setOnClickListener(new View.OnClickListener() {
+		buttonGraficoSeguidas = (Button) findViewById(R.id.buttonGraficoSeguidas);
+		buttonGraficoSeguidas.setOnClickListener(new View.OnClickListener(){
+
 			public void onClick(View v) {
-				Intent intent = new Intent(TelaEstatisticasActivity.this,
-						TelaMenuActivity.class);
-				startActivity(intent);
+				GraficoRefeicoesSeguidas line = new GraficoRefeicoesSeguidas();
+				Intent lineIntent = line.getIntent(TelaEstatisticasActivity.this);
+				startActivity(lineIntent);
+				
 			}
 		});
 	}
